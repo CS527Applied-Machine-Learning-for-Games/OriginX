@@ -1020,6 +1020,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a31379b4ddec76a4ca7d1abe79eb91b7, type: 3}
+--- !u!1 &1809825040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5073173291800543799, guid: b4627a6c1db494ff59e087322517c153,
+    type: 3}
+  m_PrefabInstance: {fileID: 1426190481095932962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1809825041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809825040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 1
+    NumStackedVectorObservations: 1
+    VectorActionSize: 01000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 1
+  m_BehaviorName: Agent
+  TeamId: 0
+  m_UseChildSensors: 1
 --- !u!4 &1988078009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5073173291800387175, guid: b4627a6c1db494ff59e087322517c153,

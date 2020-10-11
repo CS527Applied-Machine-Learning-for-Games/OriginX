@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public enum EnemyState
 {
@@ -11,6 +14,8 @@ public enum EnemyState
 
 public class EnemyController : MonoBehaviour
 {
+
+
     private CharacterAnimations enemy_Anim;
     private NavMeshAgent navAgent;
     private Transform playerTarget;
@@ -20,6 +25,13 @@ public class EnemyController : MonoBehaviour
     private float wait_Before_Attack_Time = 3f;
     private float attack_Timer;
     private EnemyState enemy_State;
+    public int startingHealth = 100;
+
+
+    private int CurrentHealth;
+    private Vector3 StartPosition;
+
+    public EnemyManager enemyManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,12 +42,21 @@ public class EnemyController : MonoBehaviour
 
     }
 
+
     void Start()
-    {
+    {   
+        StartPosition = transform.position;
+        CurrentHealth = startingHealth;
         enemy_State = EnemyState.CHASE;
         attack_Timer = wait_Before_Attack_Time;
+        navAgent = GetComponent<NavMeshAgent>();
     }
 
+  //  private void FixedUpdate()
+   // {
+   //     navAgent.destination = Agent.transform.position;
+        //transform.position = Vector3.MoveTowards(transform.position, Agent.transform.position, Time.fixedDeltaTime * speed);
+ //   }
     // Update is called once per frame
     void Update()
     {
@@ -47,6 +68,29 @@ public class EnemyController : MonoBehaviour
         {
             AttackPlayer();
         }
+    }
+
+    public void GetShot(int damage, PlayerAttackInput shooter)
+    {
+        ApplyDamage(damage, shooter);
+    }
+    
+    private void ApplyDamage(int damage, PlayerAttackInput shooter)
+    {
+        CurrentHealth -= damage;
+
+        if (CurrentHealth <= 0)
+        {
+            Die(shooter);
+        }
+    }
+    
+    private void Die(PlayerAttackInput shooter)
+    {
+        shooter.RegisterKill();
+        
+        gameObject.SetActive(false);
+        enemyManager.RegisterDeath();
     }
 
     void ChasePlayer()
