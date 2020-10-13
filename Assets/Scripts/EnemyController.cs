@@ -5,6 +5,7 @@ using Unity.MLAgents;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public enum EnemyState
 {
@@ -24,6 +25,10 @@ public class EnemyController : MonoBehaviour
     public float chase_Player_After_Attack_Distance = 1f;
     private float wait_Before_Attack_Time = 3f;
     private float attack_Timer;
+    public GameObject enemyHealth;
+
+    public Text myTextenemy;
+
     private EnemyState enemy_State;
     public int damage = 1;
 
@@ -57,7 +62,9 @@ public class EnemyController : MonoBehaviour
         enemy_State = EnemyState.CHASE;
         attack_Timer = wait_Before_Attack_Time;
         navAgent = GetComponent<NavMeshAgent>();
-        Agent.OnEnvironmentReset += Respawn;
+        myTextenemy = GameObject.Find("EnemyScore").GetComponentInChildren<Text>();
+        myTextenemy.text = "Enemy Health :  " + 100;
+        // Agent.OnEnvironmentReset += Respawn;
     }
 
 
@@ -82,9 +89,9 @@ public class EnemyController : MonoBehaviour
     
     private void ApplyDamage(int damage, PlayerAttackInput player)
     {
-        CurrentHealth = CurrentHealth - damage;        
-        Debug.LogWarning("enemy");
-        Debug.LogWarning(CurrentHealth);
+        myTextenemy = GameObject.Find("EnemyScore").GetComponentInChildren<Text>();
+        myTextenemy.text = "Enemy Health :  " + CurrentHealth.ToString();
+        CurrentHealth = CurrentHealth - damage; 
 
         if (CurrentHealth <= 0)
         {
@@ -149,20 +156,13 @@ public class EnemyController : MonoBehaviour
         attack_Timer += Time.deltaTime;
         if(attack_Timer > wait_Before_Attack_Time)
         {
-            if(Random.Range(0,2)>0)
-            {
-                
+
                 enemy_Anim.Attack_1();
                // AddReward(0.033f);
                 Debug.LogWarning("IN hit");
                 Hit();
 
-            }
-            else
-            {
-                enemy_Anim.Attack_2();
-            }
-            attack_Timer = 0f;
+                attack_Timer = 0f;
         }
         if(Vector3.Distance(transform.position,playerTarget.position) > attack_Distance + chase_Player_After_Attack_Distance)
         {

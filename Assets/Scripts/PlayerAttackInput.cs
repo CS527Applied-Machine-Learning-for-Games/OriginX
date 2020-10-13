@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
+using UnityEngine.UI;
 using Unity.Mathematics;
 
 
@@ -30,6 +31,10 @@ public class PlayerAttackInput : Agent
     public GameObject raycastObject;
 
     public int CurrentHealth;
+    public GameObject playerHealth;
+
+
+    public Text myText;
 
 
     private void Hit()
@@ -43,7 +48,6 @@ public class PlayerAttackInput : Agent
     // Update is called once per frame
     public override void OnActionReceived(float[] vectorAction)
     {   //when you press keys J- defend and K-attack
-        Debug.LogWarning("onaction");
         if (Mathf.RoundToInt(vectorAction[0]) >= 1){
 
             playerAnimation.UnFreezeAnimation();
@@ -59,10 +63,8 @@ public class PlayerAttackInput : Agent
                 Vector3 raycastOffset = new Vector3(0, 0.5f, 0);
                 if(Physics.Raycast(this.transform.position+raycastOffset,transform.TransformDirection(Vector3.forward), out var hit, 2.0f))
                 {
-                    Debug.LogWarning("IN out");
                     if (hit.transform.tag == "Enemy"){
                     AddReward(0.033f);
-                    Debug.LogWarning("IN hit");
                     Hit();
                     }
 
@@ -84,9 +86,6 @@ public class PlayerAttackInput : Agent
         actionsOut[0] = Input.GetKeyDown(KeyCode.J) ? 1f : 0f;
         actionsOut[1] = Input.GetKeyUp(KeyCode.J) ? 1f : 0f;
         actionsOut[2] = Input.GetKey(KeyCode.K) ? 1f : 0f;
-        //actionsOut[3] = Input.GetAxis("Horizontal");
-        //actionsOut[1] = -Input.GetAxis("Vertical");
-        //actionsOut[4] = Input.GetAxis("Vertical");
     }
 
     public void RegisterKill()
@@ -100,6 +99,8 @@ public class PlayerAttackInput : Agent
        StartingPosition = transform.position;
        CurrentHealth = startingHealth;
        playerAnimation = GetComponent<CharacterAnimations>();
+        myText = GameObject.Find("PlayerScore").GetComponentInChildren<Text>();
+        myText.text = "Player Health :  " + 100;
     }
 
     public override void OnEpisodeBegin()
@@ -118,9 +119,11 @@ public class PlayerAttackInput : Agent
     
     private void ApplyDamage(int damage, EnemyController shooter)
     {
+        myText = GameObject.Find("PlayerScore").GetComponentInChildren<Text>();
+        myText.text = "Player Health :  " + CurrentHealth.ToString();
         CurrentHealth = CurrentHealth - damage;
+
         AddReward(-0.033f);
-        Debug.LogWarning("playr");
         Debug.LogWarning(CurrentHealth);
 
         if (CurrentHealth <= 0)
