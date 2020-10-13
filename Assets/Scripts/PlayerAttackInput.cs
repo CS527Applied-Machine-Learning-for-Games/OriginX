@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
@@ -10,23 +11,39 @@ public class PlayerAttackInput : Agent
 {
     public int score = 0;
 
-    public int damage = 100;
+    public int damage = 1;
 
-    public EnemyManager enemyManager;
+    public int startingHealth = 100;
+
+    public Transform shootingPoint;
+
+    public EnemyController enemyControl;
 
     private CharacterAnimations playerAnimation;
-
-    private EnemyController enemyControl;
 
     private Vector3 StartingPosition;
 
     private EnvironmentParameters EnvironmentParameters;
 
+    public event Action OnEnvironmentReset;
+
+    public GameObject raycastObject;
+
+    public int CurrentHealth;
+
+
+    private void Hit()
+    {
+        enemyControl = GameObject.Find("Enemy").GetComponent<EnemyController>() as EnemyController;
+        enemyControl.GetShot(damage, this);
+        playerAnimation.Attack_1();
+    }
 
     // Start is called before the first frame update
     // Update is called once per frame
     public override void OnActionReceived(float[] vectorAction)
     {   //when you press keys J- defend and K-attack
+        Debug.LogWarning("onaction");
         if (Mathf.RoundToInt(vectorAction[0]) >= 1){
 
             playerAnimation.UnFreezeAnimation();
@@ -39,16 +56,17 @@ public class PlayerAttackInput : Agent
             playerAnimation.Defend(false);
         }
         if (Mathf.RoundToInt(vectorAction[2]) >= 1){
-            if(UnityEngine.Random.Range(0,2)>0)
-            {
-                AddReward(0.033f);
-                enemyControl.GetShot(damage, this);
-                playerAnimation.Attack_1();
-            }
-            else
-            {
-                playerAnimation.Attack_2();
-            }
+                Vector3 raycastOffset = new Vector3(0, 0.5f, 0);
+                if(Physics.Raycast(this.transform.position+raycastOffset,transform.TransformDirection(Vector3.forward), out var hit, 2.0f))
+                {
+                    Debug.LogWarning("IN out");
+                    if (hit.transform.tag == "Enemy"){
+                    AddReward(0.033f);
+                    Debug.LogWarning("IN hit");
+                    Hit();
+                    }
+
+                }
         }
     }
 
@@ -80,12 +98,53 @@ public class PlayerAttackInput : Agent
     public override void Initialize()
     {
        StartingPosition = transform.position;
+       CurrentHealth = startingHealth;
        playerAnimation = GetComponent<CharacterAnimations>();
     }
 
     public override void OnEpisodeBegin()
+    
     {
+        OnEnvironmentReset?.Invoke();
         transform.position = StartingPosition;
+        Debug.LogWarning("episode begin!!!!");
     }
+
+        public void GetShot(int damage, EnemyController shooter)
+    {
+
+        ApplyDamage(damage, shooter);
+    }
+    
+    private void ApplyDamage(int damage, EnemyController shooter)
+    {
+        shooter.CurrentHealth = shooter.CurrentHealth - damage;
+        AddReward(-0.033f);
+        Debug.LogWarning("playr");
+        Debug.LogWarning(shooter.CurrentHealth);
+
+        if (shooter.CurrentHealth <= 0)
+        {
+            Die(shooter);
+        }
+    }
+    
+    private void Die(EnemyController shooter)
+    {
+        AddReward(-0.033f);
+        SetEnemiesActive();
+        //shooter.EndEpisode(); 
+    }
+
+    private void SetEnemiesActive()
+    {
+        gameObject.SetActive(false);
+        
+        StartingPosition = transform.position;
+        gameObject.SetActive(true);
+        CurrentHealth = startingHealth;
+        //CurrentHealth = startingHealth;
+    }
+
 
 }

@@ -1,0 +1,23 @@
+{
+    "Agent": {
+        "checkpoints": [
+            {
+                "steps": 8291,
+                "file_path": "results/testworkwork5/Agent/Agent-8291.nn",
+                "reward": 1.0688817193654376,
+                "creation_time": 1602563271.679497
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 8291,
+            "file_path": "results/testworkwork5/Agent.nn",
+            "reward": 1.0688817193654376,
+            "creation_time": 1602563271.679497
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.1.0",
+        "mlagents_version": "0.20.0",
+        "tensorflow_version": "2.3.1"
+    }
+}

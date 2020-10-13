@@ -25,13 +25,20 @@ public class EnemyController : MonoBehaviour
     private float wait_Before_Attack_Time = 3f;
     private float attack_Timer;
     private EnemyState enemy_State;
+    public int damage = 1;
+
     public int startingHealth = 100;
 
+    public PlayerAttackInput Agent;
 
-    private int CurrentHealth;
+    public PlayerAttackInput playerControl;
+
+    public event Action OnEnvironmentReset;
+
+
+
+    public int CurrentHealth;
     private Vector3 StartPosition;
-
-    public EnemyManager enemyManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -50,13 +57,10 @@ public class EnemyController : MonoBehaviour
         enemy_State = EnemyState.CHASE;
         attack_Timer = wait_Before_Attack_Time;
         navAgent = GetComponent<NavMeshAgent>();
+        Agent.OnEnvironmentReset += Respawn;
     }
 
-  //  private void FixedUpdate()
-   // {
-   //     navAgent.destination = Agent.transform.position;
-        //transform.position = Vector3.MoveTowards(transform.position, Agent.transform.position, Time.fixedDeltaTime * speed);
- //   }
+
     // Update is called once per frame
     void Update()
     {
@@ -72,14 +76,17 @@ public class EnemyController : MonoBehaviour
 
     public void GetShot(int damage, PlayerAttackInput shooter)
     {
+
         ApplyDamage(damage, shooter);
     }
     
     private void ApplyDamage(int damage, PlayerAttackInput shooter)
     {
-        CurrentHealth -= damage;
+        shooter.CurrentHealth = shooter.CurrentHealth - damage;        
+        Debug.LogWarning("enemy");
+        Debug.LogWarning(shooter.CurrentHealth);
 
-        if (CurrentHealth <= 0)
+        if (shooter.CurrentHealth <= 0)
         {
             Die(shooter);
         }
@@ -88,9 +95,25 @@ public class EnemyController : MonoBehaviour
     private void Die(PlayerAttackInput shooter)
     {
         shooter.RegisterKill();
-        
+        SetEnemiesActive();
+        shooter.EndEpisode(); 
+    }
+
+    private void SetEnemiesActive()
+    {
         gameObject.SetActive(false);
-        enemyManager.RegisterDeath();
+        CurrentHealth = startingHealth;
+        StartPosition = transform.position;
+        gameObject.SetActive(true);
+        //CurrentHealth = startingHealth;
+    }
+    public void Respawn()
+    {
+        StartPosition = transform.position;
+        CurrentHealth = startingHealth;
+        enemy_State = EnemyState.CHASE;
+        attack_Timer = wait_Before_Attack_Time;
+        
     }
 
     void ChasePlayer()
@@ -111,6 +134,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void Hit()
+    {
+        playerControl = GameObject.Find("Warrior").GetComponent<PlayerAttackInput>() as PlayerAttackInput;
+        playerControl.GetShot(damage, this);
+        //playerAnimation.Attack_1();
+    }
+
     void AttackPlayer()
     {
         navAgent.velocity = Vector3.zero;
@@ -121,7 +151,12 @@ public class EnemyController : MonoBehaviour
         {
             if(Random.Range(0,2)>0)
             {
+                
                 enemy_Anim.Attack_1();
+               // AddReward(0.033f);
+                Debug.LogWarning("IN hit");
+                Hit();
+
             }
             else
             {
