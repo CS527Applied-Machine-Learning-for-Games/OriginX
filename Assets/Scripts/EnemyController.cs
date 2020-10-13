@@ -74,29 +74,29 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void GetShot(int damage, PlayerAttackInput shooter)
+    public void GetShot(int damage, PlayerAttackInput player)
     {
 
-        ApplyDamage(damage, shooter);
+        ApplyDamage(damage, player);
     }
     
-    private void ApplyDamage(int damage, PlayerAttackInput shooter)
+    private void ApplyDamage(int damage, PlayerAttackInput player)
     {
-        shooter.CurrentHealth = shooter.CurrentHealth - damage;        
+        CurrentHealth = CurrentHealth - damage;        
         Debug.LogWarning("enemy");
-        Debug.LogWarning(shooter.CurrentHealth);
+        Debug.LogWarning(CurrentHealth);
 
-        if (shooter.CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
-            Die(shooter);
+            Die(player);
         }
     }
     
-    private void Die(PlayerAttackInput shooter)
+    private void Die(PlayerAttackInput player)
     {
-        shooter.RegisterKill();
+        player.RegisterKill();
         SetEnemiesActive();
-        shooter.EndEpisode(); 
+        player.EndEpisode(); 
     }
 
     private void SetEnemiesActive()

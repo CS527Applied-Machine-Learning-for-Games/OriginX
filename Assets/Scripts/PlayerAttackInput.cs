@@ -110,7 +110,7 @@ public class PlayerAttackInput : Agent
         Debug.LogWarning("episode begin!!!!");
     }
 
-        public void GetShot(int damage, EnemyController shooter)
+    public void GetShot(int damage, EnemyController shooter)
     {
 
         ApplyDamage(damage, shooter);
@@ -118,12 +118,12 @@ public class PlayerAttackInput : Agent
     
     private void ApplyDamage(int damage, EnemyController shooter)
     {
-        shooter.CurrentHealth = shooter.CurrentHealth - damage;
+        CurrentHealth = CurrentHealth - damage;
         AddReward(-0.033f);
         Debug.LogWarning("playr");
-        Debug.LogWarning(shooter.CurrentHealth);
+        Debug.LogWarning(CurrentHealth);
 
-        if (shooter.CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Die(shooter);
         }
@@ -139,7 +139,6 @@ public class PlayerAttackInput : Agent
     private void SetEnemiesActive()
     {
         gameObject.SetActive(false);
-        
         StartingPosition = transform.position;
         gameObject.SetActive(true);
         CurrentHealth = startingHealth;
