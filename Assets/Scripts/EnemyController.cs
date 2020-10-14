@@ -158,8 +158,6 @@ public class EnemyController : MonoBehaviour
         {
 
                 enemy_Anim.Attack_1();
-               // AddReward(0.033f);
-                Debug.LogWarning("IN hit");
                 Hit();
 
                 attack_Timer = 0f;

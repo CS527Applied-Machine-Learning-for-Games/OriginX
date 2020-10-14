@@ -108,7 +108,6 @@ public class PlayerAttackInput : Agent
     {
         OnEnvironmentReset?.Invoke();
         transform.position = StartingPosition;
-        Debug.LogWarning("episode begin!!!!");
     }
 
     public void GetShot(int damage, EnemyController shooter)
@@ -124,8 +123,6 @@ public class PlayerAttackInput : Agent
         CurrentHealth = CurrentHealth - damage;
 
         AddReward(-0.033f);
-        Debug.LogWarning(CurrentHealth);
-
         if (CurrentHealth <= 0)
         {
             Die(shooter);
