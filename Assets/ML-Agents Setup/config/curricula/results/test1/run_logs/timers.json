@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1602371428",
+        "python_version": "3.7.7 (default, Mar 26 2020, 10:32:53) \n[Clang 4.0.1 (tags/RELEASE_401/final)]",
+        "command_line_arguments": "/opt/anaconda3/bin/mlagents-learn shooting.yaml --run-id=test1",
+        "mlagents_version": "0.20.0",
+        "mlagents_envs_version": "0.20.0",
+        "communication_protocol_version": "1.1.0",
+        "tensorflow_version": "2.3.1",
+        "numpy_version": "1.18.1",
+        "end_time_seconds": "1602374792"
+    },
+    "total": 3364.527888091,
+    "count": 1,
+    "self": 0.02020075700011148,
+    "children": {
+        "run_training.setup": {
+            "total": 0.019580384999999367,
+            "count": 1,
+            "self": 0.019580384999999367
+        },
+        "TrainerController.start_learning": {
+            "total": 3364.4881069489998,
+            "count": 1,
+            "self": 0.004262003999428998,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 3364.4835352610003,
+                    "count": 1,
+                    "self": 3364.4835352610003
+                },
+                "trainer_threads": {
+                    "total": 6.309000127657782e-06,
+                    "count": 1,
+                    "self": 6.309000127657782e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 0.00030337499993038364,
+                    "count": 1,
+                    "self": 0.00030337499993038364
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public enum EnemyState
 {
@@ -11,6 +15,8 @@ public enum EnemyState
 
 public class EnemyController : MonoBehaviour
 {
+
+
     private CharacterAnimations enemy_Anim;
     private NavMeshAgent navAgent;
     private Transform playerTarget;
@@ -19,7 +25,25 @@ public class EnemyController : MonoBehaviour
     public float chase_Player_After_Attack_Distance = 1f;
     private float wait_Before_Attack_Time = 3f;
     private float attack_Timer;
+    public GameObject enemyHealth;
+
+    public Text myTextenemy;
+
     private EnemyState enemy_State;
+    public int damage = 1;
+
+    public int startingHealth = 100;
+
+    public PlayerAttackInput Agent;
+
+    public PlayerAttackInput playerControl;
+
+    public event Action OnEnvironmentReset;
+
+
+
+    public int CurrentHealth;
+    private Vector3 StartPosition;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,11 +54,19 @@ public class EnemyController : MonoBehaviour
 
     }
 
+
     void Start()
-    {
+    {   
+        StartPosition = transform.position;
+        CurrentHealth = startingHealth;
         enemy_State = EnemyState.CHASE;
         attack_Timer = wait_Before_Attack_Time;
+        navAgent = GetComponent<NavMeshAgent>();
+        myTextenemy = GameObject.Find("EnemyScore").GetComponentInChildren<Text>();
+        myTextenemy.text = "Enemy Health :  " + 100;
+        // Agent.OnEnvironmentReset += Respawn;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -47,6 +79,48 @@ public class EnemyController : MonoBehaviour
         {
             AttackPlayer();
         }
+    }
+
+    public void GetShot(int damage, PlayerAttackInput player)
+    {
+
+        ApplyDamage(damage, player);
+    }
+    
+    private void ApplyDamage(int damage, PlayerAttackInput player)
+    {
+        myTextenemy = GameObject.Find("EnemyScore").GetComponentInChildren<Text>();
+        myTextenemy.text = "Enemy Health :  " + CurrentHealth.ToString();
+        CurrentHealth = CurrentHealth - damage; 
+
+        if (CurrentHealth <= 0)
+        {
+            Die(player);
+        }
+    }
+    
+    private void Die(PlayerAttackInput player)
+    {
+        player.RegisterKill();
+        SetEnemiesActive();
+        player.EndEpisode(); 
+    }
+
+    private void SetEnemiesActive()
+    {
+        gameObject.SetActive(false);
+        CurrentHealth = startingHealth;
+        StartPosition = transform.position;
+        gameObject.SetActive(true);
+        //CurrentHealth = startingHealth;
+    }
+    public void Respawn()
+    {
+        StartPosition = transform.position;
+        CurrentHealth = startingHealth;
+        enemy_State = EnemyState.CHASE;
+        attack_Timer = wait_Before_Attack_Time;
+        
     }
 
     void ChasePlayer()
@@ -67,6 +141,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void Hit()
+    {
+        playerControl = GameObject.Find("Warrior").GetComponent<PlayerAttackInput>() as PlayerAttackInput;
+        playerControl.GetShot(damage, this);
+        //playerAnimation.Attack_1();
+    }
+
     void AttackPlayer()
     {
         navAgent.velocity = Vector3.zero;
@@ -75,15 +156,11 @@ public class EnemyController : MonoBehaviour
         attack_Timer += Time.deltaTime;
         if(attack_Timer > wait_Before_Attack_Time)
         {
-            if(Random.Range(0,2)>0)
-            {
+
                 enemy_Anim.Attack_1();
-            }
-            else
-            {
-                enemy_Anim.Attack_2();
-            }
-            attack_Timer = 0f;
+                Hit();
+
+                attack_Timer = 0f;
         }
         if(Vector3.Distance(transform.position,playerTarget.position) > attack_Distance + chase_Player_After_Attack_Distance)
         {
