@@ -5,7 +5,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.Mathematics;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerAttackInput : Agent
 {
@@ -32,6 +32,8 @@ public class PlayerAttackInput : Agent
     public GameObject attackPoint;
 
     public int CurrentHealth;
+
+    public GameObject gameOverPanel;
 
 
     private void Hit()
@@ -128,6 +130,8 @@ public class PlayerAttackInput : Agent
         if (CurrentHealth <= 0)
         {
             Die(shooter);
+            gameOverPanel.SetActive(true);
+            enemyControl.enemy_Anim.Walk(false);
         }
     }
     
@@ -158,5 +162,20 @@ public class PlayerAttackInput : Agent
         {
             attackPoint.SetActive(false);
         }
+    }
+
+    public void startover()
+    {
+        gameOverPanel.SetActive(false);
+        SceneManager.LoadScene("StartGameScreen");
+    }
+
+    public void closeApplication()
+    { 
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #elif (UNITY_STANDALONE)
+               Application.Quit();
+        #endif
     }
 }

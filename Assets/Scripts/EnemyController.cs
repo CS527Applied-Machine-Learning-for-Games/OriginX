@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
 {
 
 
-    private CharacterAnimations enemy_Anim;
+    public CharacterAnimations enemy_Anim;
     private NavMeshAgent navAgent;
     private Transform playerTarget;
     public float move_Speed = 3.5f;

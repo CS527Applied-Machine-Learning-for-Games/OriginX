@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public float rotation_Speed = 0.15f;
     public float rotateDegreesPerSecond = 180f;
     public GameObject panelExit;
+    public EnemyController ec;
 
     // 1st function that is called
     void Awake()
@@ -87,5 +89,17 @@ public class PlayerMove : MonoBehaviour
     {
         panelExit.SetActive(true);
         playerAnimations.Walk(false);
+        ec.enemy_Anim.Walk(false);
+    }
+
+    public void goToMainMenu()
+    {
+        SceneManager.LoadScene("StartGameScreen");
+    }
+
+    public void selectNo()
+    {
+        panelExit.SetActive(false);
+        playerAnimations.Walk(true);
     }
 }
