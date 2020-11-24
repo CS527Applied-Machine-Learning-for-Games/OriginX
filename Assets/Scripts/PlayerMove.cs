@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     public float gravity = 9.8f;
     public float rotation_Speed = 0.15f;
     public float rotateDegreesPerSecond = 180f;
+    public GameObject panelExit;
 
     // 1st function that is called
     void Awake()
@@ -80,5 +81,11 @@ public class PlayerMove : MonoBehaviour
         {
             playerAnimations.Walk(false);
         }
+    }
+
+    public void Quit()
+    {
+        panelExit.SetActive(true);
+        playerAnimations.Walk(false);
     }
 }
