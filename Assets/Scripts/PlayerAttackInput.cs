@@ -40,7 +40,7 @@ public class PlayerAttackInput : Agent
     private void Hit()
     {
         enemyControl = GameObject.Find("Enemy").GetComponent<EnemyController>() as EnemyController;
-        enemyControl.GetShot(damage, this);
+        enemyControl.GetShot(damage, enemyControl);
         playerAnimation.Attack_1();
     }
 
@@ -85,7 +85,7 @@ public class PlayerAttackInput : Agent
 
         actionsOut[0] = Input.GetKeyDown(KeyCode.J) ? 1f : 0f;
         actionsOut[1] = Input.GetKeyUp(KeyCode.J) ? 1f : 0f;
-        actionsOut[2] = Input.GetKey(KeyCode.K) ? 1f : 0f;
+        actionsOut[2] = Input.GetKey(KeyCode.K) ? 1f : 0f;   
     }
 
     public void RegisterKill()
@@ -110,13 +110,13 @@ public class PlayerAttackInput : Agent
         transform.position = StartingPosition;
     }
 
-    public void GetShot(int damage, EnemyController shooter)
+    public void GetShot(int damage, PlayerAttackInput player)
     {
 
-        ApplyDamage(damage, shooter);
+        ApplyDamage(damage, player);
     }
     
-    private void ApplyDamage(int damage, EnemyController shooter)
+    private void ApplyDamage(int damage, PlayerAttackInput player)
     {
         myText = GameObject.Find("PlayerScore").GetComponentInChildren<Text>();
         myText.text = "Player Health :  " + CurrentHealth.ToString();
@@ -125,15 +125,15 @@ public class PlayerAttackInput : Agent
         AddReward(-0.033f);
         if (CurrentHealth <= 0)
         {
-            Die(shooter);
+            Die(player);
         }
     }
     
-    private void Die(EnemyController shooter)
+    private void Die(PlayerAttackInput player)
     {
         AddReward(-0.033f);
         SetEnemiesActive();
-        //shooter.EndEpisode(); 
+        EndEpisode();
     }
 
     private void SetEnemiesActive()

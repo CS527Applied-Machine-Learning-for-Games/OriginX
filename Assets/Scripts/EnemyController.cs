@@ -64,6 +64,7 @@ public class EnemyController : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         myTextenemy = GameObject.Find("EnemyScore").GetComponentInChildren<Text>();
         myTextenemy.text = "Enemy Health :  " + 100;
+        SetEnemiesActive();
         // Agent.OnEnvironmentReset += Respawn;
     }
 
@@ -81,29 +82,31 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void GetShot(int damage, PlayerAttackInput player)
+    public void GetShot(int damage, EnemyController shooter)
     {
 
-        ApplyDamage(damage, player);
+        ApplyDamage(damage, shooter);
     }
     
-    private void ApplyDamage(int damage, PlayerAttackInput player)
+    private void ApplyDamage(int damage, EnemyController shooter)
     {
         myTextenemy = GameObject.Find("EnemyScore").GetComponentInChildren<Text>();
         myTextenemy.text = "Enemy Health :  " + CurrentHealth.ToString();
         CurrentHealth = CurrentHealth - damage; 
-
+        playerControl.AddReward(0.033f);
         if (CurrentHealth <= 0)
         {
-            Die(player);
+            Die(shooter);
         }
     }
     
-    private void Die(PlayerAttackInput player)
+    private void Die(EnemyController shooter)
     {
-        player.RegisterKill();
+        //AddReward(0.033f);
+        playerControl.AddReward(0.033f);
+        //shooter.RegisterKill();
         SetEnemiesActive();
-        player.EndEpisode(); 
+        playerControl.EndEpisode(); 
     }
 
     private void SetEnemiesActive()
@@ -144,7 +147,7 @@ public class EnemyController : MonoBehaviour
     private void Hit()
     {
         playerControl = GameObject.Find("Warrior").GetComponent<PlayerAttackInput>() as PlayerAttackInput;
-        playerControl.GetShot(damage, this);
+        playerControl.GetShot(damage, playerControl);
         //playerAnimation.Attack_1();
     }
 
