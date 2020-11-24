@@ -1,0 +1,30 @@
+{
+    "Agent": {
+        "checkpoints": [
+            {
+                "steps": 499975,
+                "file_path": "results/train29/Agent/Agent-499975.onnx",
+                "reward": 9.307522151781166,
+                "creation_time": 1606209125.0624902
+            },
+            {
+                "steps": 500016,
+                "file_path": "results/train29/Agent/Agent-500016.onnx",
+                "reward": 9.311271844591413,
+                "creation_time": 1606209125.106068
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500016,
+            "file_path": "results/train29/Agent.onnx",
+            "reward": 9.311271844591413,
+            "creation_time": 1606209125.106068
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.22.0",
+        "torch_version": "1.7.0",
+        "tensorflow_version": "1.14.0"
+    }
+}
