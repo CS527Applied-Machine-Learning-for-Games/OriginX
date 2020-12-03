@@ -13,7 +13,7 @@ public enum EnemyState
     ATTACK
 }
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Agent
 {
 
 
@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour
 
     public PlayerAttackInput playerControl;
 
-    public event Action OnEnvironmentReset;
+    // public event Action OnEnvironmentReset;
 
 
 
