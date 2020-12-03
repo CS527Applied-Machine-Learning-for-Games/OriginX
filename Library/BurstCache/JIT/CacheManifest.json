@@ -3,38 +3,56 @@
   "Assemblies": [
     {
       "FullName": "Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2020-10-11T05:57:31Z"
-    },
-    {
-      "FullName": "netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
-      "LastWriteTime": "2020-10-10T04:18:23Z"
+      "LastWriteTime": "2020-11-24T21:05:41Z"
     },
     {
       "FullName": "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-      "LastWriteTime": "2020-10-10T04:18:23Z"
+      "LastWriteTime": "2020-09-05T03:26:31Z"
+    },
+    {
+      "FullName": "UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "LastWriteTime": "2020-09-05T03:26:29Z"
+    },
+    {
+      "FullName": "Unity.Barracuda, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null",
+      "LastWriteTime": "2020-11-24T21:05:42Z"
+    },
+    {
+      "FullName": "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "LastWriteTime": "2020-09-05T03:26:31Z"
     }
   ],
   "Functions": [
     {
       "FullName": "System.Int32 Unity.Burst.Intrinsics.X86::DoGetCSRTrampoline()",
       "ModuleOptionsHash": 8794384452606821980,
-      "ModuleHash": "a8ecfe2ebcd9a7c282aed2a9628c9df8",
+      "ModuleHash": "8f8b0b81d1fc79b2e4670e452b9fde4b",
       "LinkName": "CDCA4A5193BE5947",
       "AssemblyDependencyIndices": [
         0,
-        1,
-        2
+        1
       ]
     },
     {
       "FullName": "System.Void Unity.Burst.Intrinsics.X86::DoSetCSRTrampoline(System.Int32)",
       "ModuleOptionsHash": 8794384452606821980,
-      "ModuleHash": "3604457d9e3df4692ea1d321a8bdbadb",
+      "ModuleHash": "2c85c3a0b7732f94c4fff76a14c00283",
       "LinkName": "801E9A000BB37B05",
       "AssemblyDependencyIndices": [
         0,
-        1,
-        2
+        1
+      ]
+    },
+    {
+      "FullName": "System.Void Unity.Jobs.IJobParallelForExtensions/ParallelForJobStruct`1<Unity.Barracuda.BurstCPUOps/ExpJob>::Execute(T&,System.IntPtr,System.IntPtr,Unity.Jobs.LowLevel.Unsafe.JobRanges&,System.Int32)",
+      "ModuleOptionsHash": 8794384452606821980,
+      "ModuleHash": "fbe829b54c6909ff0b5f6b766b638691",
+      "LinkName": "53FE69074E5AFF26",
+      "AssemblyDependencyIndices": [
+        2,
+        3,
+        4,
+        1
       ]
     }
   ]

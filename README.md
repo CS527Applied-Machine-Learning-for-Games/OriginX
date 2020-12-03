@@ -1,2 +1,1 @@
-- The goal of OriginX is to develop a combat game where the player fights against an AI agent to defeat the agent and advance to the next level. 
-- The player wins the game by defeating the AI agent at every level. We have used different techniques of machine learning, primarily based on reinforcement learning (PPO). 
+# OriginX

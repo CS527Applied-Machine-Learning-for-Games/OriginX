@@ -1,0 +1,48 @@
+{
+    "Agent": {
+        "checkpoints": [
+            {
+                "steps": 3499977,
+                "file_path": "results/train_model4/Agent/Agent-3499977.onnx",
+                "reward": 9.545219330787658,
+                "creation_time": 1606227866.289525
+            },
+            {
+                "steps": 3999974,
+                "file_path": "results/train_model4/Agent/Agent-3999974.onnx",
+                "reward": 9.455657801977019,
+                "creation_time": 1606229919.917643
+            },
+            {
+                "steps": 4499999,
+                "file_path": "results/train_model4/Agent/Agent-4499999.onnx",
+                "reward": 9.522757263873753,
+                "creation_time": 1606231965.8584268
+            },
+            {
+                "steps": 4999977,
+                "file_path": "results/train_model4/Agent/Agent-4999977.onnx",
+                "reward": 9.559049193064372,
+                "creation_time": 1606234014.505413
+            },
+            {
+                "steps": 5000085,
+                "file_path": "results/train_model4/Agent/Agent-5000085.onnx",
+                "reward": 9.56222870310799,
+                "creation_time": 1606234014.590626
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000085,
+            "file_path": "results/train_model4/Agent.onnx",
+            "reward": 9.56222870310799,
+            "creation_time": 1606234014.590626
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.22.0",
+        "torch_version": "1.7.0",
+        "tensorflow_version": "2.3.1"
+    }
+}

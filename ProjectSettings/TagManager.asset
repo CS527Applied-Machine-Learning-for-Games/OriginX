@@ -4,32 +4,32 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Your_tag
-  - Enemy
-  - target
-  - ground
   - agent
-  - ball
   - iWall
-  - symbol_O_Goal
-  - symbol_X
   - wall
-  - symbol_X_Goal
-  - symbol_O
-  - goal
-  - block
-  - walkableSurface
-  - purpleAgent
-  - purpleGoal
-  - blueAgent
+  - pit
+  - frozenAgent
+  - ball
   - blueGoal
+  - blueAgent
+  - goal
+  - ground
+  - block
   - switchOff
   - pyramid
+  - switchOn
   - stone
-  - food
+  - target
   - badFood
-  - pit
-  - health1
+  - food
+  - walkableSurface
+  - symbol_X
+  - symbol_O
+  - symbol_X_Goal
+  - symbol_O_Goal
+  - purpleAgent
+  - purpleGoal
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -39,9 +39,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - invisible
+  - Enemy
+  - Player
   - 
   - 
   - 
