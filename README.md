@@ -20,4 +20,4 @@ The player and the AI agent, both, have a health bar that is initially at a maxi
 * [Kaushik Karalgikar](https://www.linkedin.com/in/kaushik-karalgikar/)
 
 ## Website
-The Demo video, technical paper, Engineering design document and For more information, check out our website [here.](http://originx.ml/)
+The demo video, technical paper, engineering design document and for more information, check out our website [here.](http://originx.ml/)
