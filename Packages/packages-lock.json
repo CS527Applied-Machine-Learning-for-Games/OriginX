@@ -13,7 +13,7 @@
       "dependencies": {}
     },
     "com.unity.ads": {
-      "version": "3.4.7",
+      "version": "3.4.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -31,20 +31,20 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.barracuda": {
-      "version": "1.1.0-preview",
+      "version": "1.0.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.burst": "1.3.4"
+        "com.unity.burst": "1.2.3"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.3.4",
+      "version": "1.2.3",
       "depth": 2,
       "source": "registry",
       "dependencies": {
-        "com.unity.mathematics": "1.2.1"
+        "com.unity.mathematics": "1.1.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -79,22 +79,18 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.mathematics": {
-      "version": "1.2.1",
+      "version": "1.1.0",
       "depth": 3,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ml-agents": {
-      "version": "file:/Users/ssrujanaa/Documents/Fall2020/CSCI-527/ml-agents/com.unity.ml-agents",
+      "version": "file:../ml-agents/com.unity.ml-agents",
       "depth": 0,
       "source": "local",
       "dependencies": {
-        "com.unity.barracuda": "1.1.0-preview",
-        "com.unity.modules.imageconversion": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0",
-        "com.unity.modules.physics": "1.0.0",
-        "com.unity.modules.physics2d": "1.0.0"
+        "com.unity.barracuda": "1.0.1"
       }
     },
     "com.unity.ml-agents.extensions": {
@@ -115,10 +111,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.purchasing": {
-      "version": "2.0.6",
+      "version": "2.1.0",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {

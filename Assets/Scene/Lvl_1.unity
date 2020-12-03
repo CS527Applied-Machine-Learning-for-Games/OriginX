@@ -306,18 +306,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
-    VectorActionSize: 01000000
+    VectorActionSize: 07000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 0
+    VectorActionSpaceType: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Agent
   TeamId: 0
   m_UseChildSensors: 1
-  m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
 --- !u!114 &53825526
 MonoBehaviour:
@@ -1081,7 +1080,6 @@ MonoBehaviour:
   m_BehaviorName: Agent
   TeamId: 0
   m_UseChildSensors: 1
-  m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
 --- !u!1001 &693420698
 PrefabInstance:
@@ -1317,7 +1315,6 @@ MonoBehaviour:
   m_BehaviorName: My Behavior
   TeamId: 0
   m_UseChildSensors: 1
-  m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
 --- !u!114 &824130085
 MonoBehaviour:
@@ -1805,7 +1802,6 @@ MonoBehaviour:
   m_BehaviorName: My Behavior
   TeamId: 0
   m_UseChildSensors: 1
-  m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
 --- !u!114 &1140168808
 MonoBehaviour:
