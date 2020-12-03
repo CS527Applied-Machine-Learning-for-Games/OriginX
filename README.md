@@ -1,7 +1,4 @@
----
-layout: default
-title: OriginX
----
+
 
 # OriginX : Destroy to Create!
 
